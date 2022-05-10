@@ -1,3 +1,28 @@
 body {
-    background-color: black;
+    background-color: rgb(141, 141, 141);
+}
+
+.boardContainer {
+    display: flex;
+    flex-wrap: wrap;
+    width: 340px;
+    position: absolute;
+    left: calc(25vw - 170px);
+    top: calc(50vh - 170px);
+}
+
+.opponentcontainer {
+    display: flex;
+    flex-wrap: wrap;
+    width: 340px;
+    position: absolute;
+    left: calc(75vw - 170px);
+    top: calc(50vh - 170px);
+}
+
+.board {
+    background-color: white;
+    border: 1px solid blue;
+    width: 32px;
+    height: 32px;
 }

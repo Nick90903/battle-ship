@@ -2,6 +2,7 @@ import { createHull } from "./dom";
 
 const shipBuilder = (count) => {
   let shipSize = count;
+  let hitCount = 0;
   let sunk = false;
   let hull = [];
 
@@ -12,15 +13,23 @@ const shipBuilder = (count) => {
       hull.push(createHull(count, i));
     }
     console.table(hull);
-
-    return hull.length;
   }
 
-  const hit = (index) => {};
+  const hit = (index) => {
+    hull[index].countHit();
+    hitCount++;
+    return hull[index].isHit();
+  };
+
+  const isSunk = () => {
+    return hitCount == shipSize ? true : false;
+  };
 
   const drawShip = () => {};
 
-  return hull.length;
+  return { hit, isSunk };
 };
 
-export { shipBuilder };
+let testShip = shipBuilder(4);
+
+export { shipBuilder, testShip };

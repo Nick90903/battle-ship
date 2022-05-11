@@ -2,14 +2,18 @@
  * @jest-environment jsdom
  */
 
-const index = require("./index");
-
-index.test("test", () => {
-  expect(index.test()).toBe(true);
-});
-
 const shipController = require("./shipController");
 
-test("Creates a ship with length 2", () => {
-  expect(shipController.shipBuilder(2)).toBe(2);
+test("Tests hull hit", () => {
+  //  expect(shipController.testShip.hit(0)).toBe(true);
+});
+
+test('Test "isSunk"', () => {
+  // expect(shipController.testShip.isSunk()).toBe(true);
+});
+
+const dom = require("./dom");
+
+test("Creates game board, expects input^2", () => {
+  expect(dom.drawBoard(10, "temp")).toBe(100);
 });

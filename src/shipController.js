@@ -27,9 +27,9 @@ const shipBuilder = (count) => {
 
   const drawShip = () => {};
 
-  return { hit, isSunk };
+  return { hit, isSunk, hull };
 };
 
-let testShip = shipBuilder(4);
+let testShip = shipBuilder(2);
 
 export { shipBuilder, testShip };

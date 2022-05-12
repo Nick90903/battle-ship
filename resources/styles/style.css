@@ -30,3 +30,10 @@ body {
 .board:hover {
     background-color: black;
 }
+
+.hull {
+    border: 1px solid blue;
+    background-color: orange;
+    width: 32px;
+    height: 32px;
+}

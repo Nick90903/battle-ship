@@ -1,23 +1,14 @@
-import { pieceClicked } from ".";
-import { testShip as boat } from "./shipController";
+import { testShip } from "./shipController";
 
-function createHull(count, index) {
-  let hit = false;
-  const hull = document.createElement("div");
-  hull.classList.add(count);
-  hull.classList.add("hull");
-  hull.value = index;
-  hull.addEventListener("click", () => {
-    this.hit(this.value);
-  });
-
-  const isHit = () => hit;
-  const countHit = () => {
-    hit = true;
-    console.log("hit");
-  };
-
-  return { hull, countHit, isHit };
+function createHull(count) {
+  let hulls = [];
+  for (let i = 0; i < count; i++) {
+    let temp = document.createElement("div");
+    temp.classList.add("board");
+    temp.classList.add("hull");
+    hulls.push(temp);
+  }
+  return hulls;
 }
 
 // Draws play Boards
@@ -25,42 +16,36 @@ function createHull(count, index) {
 function drawBoard(size, player) {
   const container = document.createElement("div");
   container.classList.add("boardContainer");
+  let tempHull = createHull(testShip[0].shipSize);
 
   // Adds class specifying which board a tile is a part of
   container.classList.add(player + "container");
   let count = 0;
 
   //draws tiles
-  for (let j = 0; j < Math.pow(size, 2); j++) {
-    let temp = document.createElement("div");
-    temp.classList.add("board");
-    temp.classList.add(count);
-    temp.classList.add(player);
-    temp.addEventListener("click", function () {
-      pieceClicked(this.classList);
-    });
-    container.appendChild(temp);
+  for (let i = 0; i < Math.pow(size, 2) - 2; i++) {
+    if (i == 10) {
+      for (let j = 0; j < tempHull.length; j++) {
+        container.appendChild(tempHull[j]);
+      }
+    } else {
+      let temp = document.createElement("div");
+      temp.classList.add("board");
+      temp.classList.add("p" + count);
+      temp.classList.add(player);
+      container.appendChild(temp);
+    }
+
     count++;
   }
   document.querySelector(".content").appendChild(container);
+  editBoard(23, tempHull[0]);
   return count;
 }
 
-function placeBoat(_start, type, boat) {
-  let boardArr = document.querySelectorAll(`.${type}`);
-  console.log(boardArr + "boardArray");
-  for (let i = 0; i < boat.hull.length; i++) {
-    boardArr[_start + i] == boat.hull[i];
-    console.log(boardArr);
-  }
-  let temp = document.querySelectorAll(`.${type}`);
-  temp.forEach((Element) => {
-    Element.remove();
-  });
-  let container = document.querySelector(`.${type}container`);
-  for (let i = 0; i < boardArr.length; i++) {
-    container.appendChild(boardArr[i]);
-  }
+function editBoard(position, newHTML) {
+  let old = document.querySelector(`.p${position}`);
+  old.parentNode.replaceChild(newHTML, old);
 }
 
-export { createHull, drawBoard, placeBoat };
+export { drawBoard };

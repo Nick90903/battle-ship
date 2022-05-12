@@ -4,16 +4,6 @@ const shipBuilder = (count) => {
   let shipSize = count;
   let hitCount = 0;
   let sunk = false;
-  let hull = [];
-
-  buildHull(count);
-
-  function buildHull(count) {
-    for (let i = 0; i < count; i++) {
-      hull.push(createHull(count, i));
-    }
-    console.table(hull);
-  }
 
   const hit = (index) => {
     hull[index].countHit();
@@ -27,9 +17,10 @@ const shipBuilder = (count) => {
 
   const drawShip = () => {};
 
-  return { hit, isSunk, hull };
+  return { hit, isSunk, shipSize };
 };
 
-let testShip = shipBuilder(2);
+let testShip = [shipBuilder(3), shipBuilder(3)];
+console.log(testShip);
 
 export { shipBuilder, testShip };

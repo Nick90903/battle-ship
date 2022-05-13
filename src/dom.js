@@ -1,15 +1,26 @@
 import { ships } from "./shipController";
 
-function createHull(count) {
-  let hulls = [];
-  for (let i = 0; i < count; i++) {
-    let temp = document.createElement("div");
-    temp.classList.add("board");
-    temp.classList.add("hull");
-    temp.value = i;
-    hulls.push(temp);
-  }
-  return hulls;
+function createHull(index, i) {
+  let hull = document.createElement("div");
+  hull.classList.add("board");
+  hull.classList.add("hull");
+  hull.classList.add(`ship${index}`);
+  hull.value = i;
+  hull.addEventListener("click", function () {
+    ships[this.classList[2].slice(4)].hit(this.value, this);
+  });
+
+  let hit = false;
+  const countHit = (element) => {
+    hit = true;
+    element.classList.add("hit");
+  };
+
+  const isHit = () => {
+    return hit;
+  };
+
+  return { hull, countHit, isHit };
 }
 
 function drawShown() {
@@ -18,7 +29,8 @@ function drawShown() {
     let container = document.createElement("div");
     container.classList.add(`ship${i}`);
     container.classList.add("shipPreview");
-    let temp = createHull(ships[i].shipSize);
+    let temp = ships[i].hullDiv;
+    console.log(temp + "temp");
     temp.forEach((element) => {
       container.appendChild(element);
     });
@@ -69,7 +81,7 @@ function placeShip(id) {
       let _reduced = parseInt(id.slice(2));
 
       if (10 - _reduced >= currentShip.shipSize) {
-        let tempHull = createHull(currentShip.shipSize);
+        let tempHull = currentShip.hullDiv;
         for (let i = 0; i < currentShip.shipSize; i++) {
           editBoard(`p${tempValue + i}`, tempHull[i]);
         }
@@ -77,7 +89,7 @@ function placeShip(id) {
         return;
       }
     } else {
-      let tempHull = createHull(currentShip.shipSize);
+      let tempHull = currentShip.hullDiv;
       for (let i = 0; i < currentShip.shipSize; i++) {
         editBoard(`p${tempValue + i}`, tempHull[i]);
       }
@@ -90,4 +102,4 @@ function placeShip(id) {
 
 drawShown();
 
-export { drawBoard };
+export { drawBoard, createHull };

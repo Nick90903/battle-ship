@@ -21,11 +21,11 @@ const shipBuilder = (count) => {
 };
 
 let ships = [
+  shipBuilder(2),
   shipBuilder(3),
-  shipBuilder(2),
-  shipBuilder(2),
+  shipBuilder(3),
+  shipBuilder(4),
   shipBuilder(5),
-  shipBuilder(6),
 ];
 console.log(ships);
 

@@ -12,6 +12,20 @@ function createHull(count) {
   return hulls;
 }
 
+function drawShown() {
+  let content = document.querySelector(".shipContent");
+  for (let i = 0; i < ships.length; i++) {
+    let container = document.createElement("div");
+    container.classList.add(`ship${i}`);
+    container.classList.add("shipPreview");
+    let temp = createHull(ships[i].shipSize);
+    temp.forEach((element) => {
+      container.appendChild(element);
+    });
+    content.appendChild(container);
+  }
+}
+
 // Draws play Boards
 
 function drawBoard(size, player) {
@@ -68,8 +82,12 @@ function placeShip(id) {
         editBoard(`p${tempValue + i}`, tempHull[i]);
       }
     }
+    const shipContainer = document.querySelector(`.ship${placed_Ships}`);
+    shipContainer.classList.add("used");
     placed_Ships++;
   }
 }
+
+drawShown();
 
 export { drawBoard };

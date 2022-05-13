@@ -2,22 +2,40 @@ body {
     background-color: rgb(141, 141, 141);
 }
 
-.boardContainer {
+.content {
     display: flex;
-    flex-wrap: wrap;
-    width: 340px;
-    position: absolute;
-    left: calc(25vw - 170px);
-    top: calc(50vh - 170px);
+    justify-content: space-between;
+    margin-top: calc(50vh - 170px);
+}
+
+
+
+.playercontainer {
+    display: grid;
+    grid-template-columns: repeat(10,34px);
+    grid-template-rows: repeat(10,34px);
 }
 
 .opponentcontainer {
+    display: grid;
+    grid-template-columns: repeat(10,34px);
+    grid-template-rows: repeat(10,34px);
+}
+
+.shipContent {
     display: flex;
-    flex-wrap: wrap;
-    width: 340px;
-    position: absolute;
-    left: calc(75vw - 170px);
-    top: calc(50vh - 170px);
+    flex-direction: column;
+    justify-content: space-between;
+    height: 340px;
+}
+
+.content .shipContent .used .hull{
+    background-color: rgba(255, 0, 0, 0);
+    border: 0px;
+}
+
+.shipPreview{
+    display: flex;
 }
 
 .board {

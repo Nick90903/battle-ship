@@ -20,7 +20,13 @@ const shipBuilder = (count) => {
   return { hit, isSunk, shipSize };
 };
 
-let testShip = [shipBuilder(3), shipBuilder(3)];
-console.log(testShip);
+let ships = [
+  shipBuilder(3),
+  shipBuilder(2),
+  shipBuilder(2),
+  shipBuilder(5),
+  shipBuilder(6),
+];
+console.log(ships);
 
-export { shipBuilder, testShip };
+export { shipBuilder, ships };

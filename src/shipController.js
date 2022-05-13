@@ -18,11 +18,19 @@ const shipBuilder = (count, index) => {
   const hit = (index, element) => {
     hull[index].countHit(element);
     hitCount++;
+    isSunk();
     return hull[index].isHit();
   };
 
   const isSunk = () => {
-    return hitCount == shipSize ? true : false;
+    if (hitCount == shipSize) {
+      sunk = true;
+      hullDiv.forEach((element) => {
+        element.classList.add("sunk");
+      });
+      return true;
+    }
+    return false;
   };
 
   const drawShip = () => {};

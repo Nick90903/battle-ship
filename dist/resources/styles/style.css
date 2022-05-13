@@ -38,6 +38,8 @@ body {
     display: flex;
 }
 
+
+
 .board {
     background-color: white;
     border: 1px solid blue;
@@ -45,13 +47,17 @@ body {
     height: 32px;
 }
 
-.board:hover {
-    background-color: black;
-}
 
 .hull {
     border: 1px solid blue;
     background-color: orange;
     width: 32px;
     height: 32px;
+}
+.hit {
+    background-color: red;
+}
+
+.sunk {
+    background-color: black;
 }

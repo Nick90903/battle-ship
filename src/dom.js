@@ -1,3 +1,4 @@
+import { attackPlayerBoard } from "./ai";
 import { ships } from "./shipController";
 
 function createHull(index, i) {
@@ -67,7 +68,9 @@ function drawBoard(size, player) {
 
 function editBoard(position, newHTML) {
   let old = document.querySelector(`.${position}`);
-  old.parentNode.replaceChild(newHTML, old);
+  let temp = newHTML;
+  temp.classList.add(old.classList[1]);
+  old.parentNode.replaceChild(temp, old);
 }
 
 let placed_Ships = 0;

@@ -45,6 +45,14 @@ let ships = [
   shipBuilder(4, 3),
   shipBuilder(5, 4),
 ];
+
+let opponentShips = [
+  shipBuilder(2, 0),
+  shipBuilder(3, 1),
+  shipBuilder(3, 2),
+  shipBuilder(4, 3),
+  shipBuilder(5, 4),
+];
 console.log(ships);
 
-export { shipBuilder, ships };
+export { shipBuilder, opponentShips, ships };

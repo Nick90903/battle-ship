@@ -53,7 +53,11 @@ function drawBoard(size, player) {
   for (let i = 0; i < Math.pow(size, 2); i++) {
     let temp = document.createElement("div");
     temp.classList.add("board");
-    temp.classList.add("p" + count);
+    if (player == "player") {
+      temp.classList.add("p" + count);
+    } else {
+      temp.classList.add("o" + count);
+    }
     temp.classList.add(player);
     temp.addEventListener("click", function () {
       placeShip(this.classList[1]);
@@ -105,4 +109,4 @@ function placeShip(id) {
 
 drawShown();
 
-export { drawBoard, createHull };
+export { drawBoard, createHull, editBoard };

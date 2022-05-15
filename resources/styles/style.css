@@ -32,6 +32,7 @@ body {
 .content .shipContent .used .hull{
     background-color: rgba(255, 0, 0, 0);
     border: 0px;
+    display: none;
 }
 
 .shipPreview{
@@ -60,4 +61,8 @@ body {
 
 .sunk {
     background-color: black;
+}
+
+.attacked {
+    background-color: firebrick;
 }

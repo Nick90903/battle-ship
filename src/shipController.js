@@ -1,6 +1,6 @@
 import { createHull } from "./dom";
 
-const shipBuilder = (count, index) => {
+const shipBuilder = (count, index, side) => {
   let shipSize = count;
   let hitCount = 0;
   let sunk = false;
@@ -8,7 +8,7 @@ const shipBuilder = (count, index) => {
   let hullDiv = [];
 
   for (let i = 0; i < count; i++) {
-    hull.push(createHull(index, i));
+    hull.push(createHull(index, i, side));
   }
 
   hull.forEach((element) => {
@@ -39,19 +39,19 @@ const shipBuilder = (count, index) => {
 };
 
 let ships = [
-  shipBuilder(2, 0),
-  shipBuilder(3, 1),
-  shipBuilder(3, 2),
-  shipBuilder(4, 3),
-  shipBuilder(5, 4),
+  shipBuilder(2, 0, "p"),
+  shipBuilder(3, 1, "p"),
+  shipBuilder(3, 2, "p"),
+  shipBuilder(4, 3, "p"),
+  shipBuilder(5, 4, "p"),
 ];
 
 let opponentShips = [
-  shipBuilder(2, 0),
-  shipBuilder(3, 1),
-  shipBuilder(3, 2),
-  shipBuilder(4, 3),
-  shipBuilder(5, 4),
+  shipBuilder(2, 0, "o"),
+  shipBuilder(3, 1, "o"),
+  shipBuilder(3, 2, "o"),
+  shipBuilder(4, 3, "o"),
+  shipBuilder(5, 4, "o"),
 ];
 console.log(ships);
 

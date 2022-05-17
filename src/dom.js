@@ -1,15 +1,21 @@
-import { attackPlayerBoard } from "./ai";
-import { ships } from "./shipController";
+import { attackAI, attackPlayerBoard } from "./ai";
+import { opponentShips, ships } from "./shipController";
 
-function createHull(index, i) {
+function createHull(index, i, side) {
   let hull = document.createElement("div");
   hull.classList.add("board");
   hull.classList.add("hull");
   hull.classList.add(`ship${index}`);
   hull.value = i;
-  hull.addEventListener("click", function () {
-    ships[this.classList[2].slice(4)].hit(this.value, this);
-  });
+  if (side == "p") {
+    hull.addEventListener("click", function () {
+      ships[this.classList[2].slice(4)].hit(this.value, this);
+    });
+  } else {
+    hull.addEventListener("click", function () {
+      opponentShips[this.classList[2].slice(4)].hit(this.value, this);
+    });
+  }
 
   let hit = false;
   const countHit = (element) => {
@@ -24,6 +30,7 @@ function createHull(index, i) {
   return { hull, countHit, isHit };
 }
 
+// Draws ship preview.
 function drawShown() {
   let content = document.querySelector(".shipContent");
   for (let i = 0; i < ships.length; i++) {
@@ -55,13 +62,17 @@ function drawBoard(size, player) {
     temp.classList.add("board");
     if (player == "player") {
       temp.classList.add("p" + count);
+      temp.addEventListener("click", function () {
+        placeShip(this.classList[1]);
+      });
     } else {
       temp.classList.add("o" + count);
+      temp.addEventListener("click", function () {
+        attackAI(this.classList[1]);
+      });
     }
     temp.classList.add(player);
-    temp.addEventListener("click", function () {
-      placeShip(this.classList[1]);
-    });
+
     container.appendChild(temp);
 
     count++;

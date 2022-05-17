@@ -55,6 +55,11 @@ body {
     width: 32px;
     height: 32px;
 }
+
+.miss {
+    background-color: lightblue;
+}
+
 .hit {
     background-color: red;
 }
@@ -64,5 +69,5 @@ body {
 }
 
 .attacked {
-    background-color: firebrick;
+    background-color: lightblue;
 }

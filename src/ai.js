@@ -1,3 +1,4 @@
+import { noOverlap } from ".";
 import { editBoard } from "./dom";
 import { opponentShips, ships } from "./shipController";
 
@@ -41,23 +42,6 @@ function placeAI() {
   }
 }
 
-function noOverlap(tileID, shipLength) {
-  let _arr = [];
-  if (tileID + shipLength + 2 > 99) {
-    return false;
-  } else {
-    for (let i = 0; i < shipLength + 2; i++) {
-      let piece = document.querySelector(`.o${tileID + i}`);
-      piece.classList.forEach((item) => {
-        _arr.push(item);
-      });
-    }
-    console.log(_arr);
-    console.log(`Contains Hull? ${_arr.includes("hull")}`);
-    return !_arr.includes("hull");
-  }
-}
-
 let hitSpots = [];
 function attackPlayerBoard() {
   let randomNumber = Math.floor(Math.random() * 100);
@@ -78,4 +62,15 @@ function attackPlayerBoard() {
   }
 }
 
-export { attackPlayerBoard, placeAI };
+let attacked = [];
+function attackAI(ID) {
+  if (!attacked.includes(ID)) {
+    document.querySelector(`.${ID}`).classList.add("miss");
+    attacked.push(ID);
+    attackPlayerBoard();
+  } else {
+    return;
+  }
+}
+
+export { attackPlayerBoard, placeAI, attackAI };

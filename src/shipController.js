@@ -15,11 +15,15 @@ const shipBuilder = (count, index, side) => {
     hullDiv.push(element.hull);
   });
 
-  const hit = (index, element) => {
-    hull[index].countHit(element);
-    hitCount++;
-    isSunk();
-    return hull[index].isHit();
+  const hit = (index, element, _canHit) => {
+    if (_canHit) {
+      hull[index].countHit(element);
+      hitCount++;
+      isSunk();
+      return hull[index].isHit();
+    } else {
+      return;
+    }
   };
 
   const isSunk = () => {

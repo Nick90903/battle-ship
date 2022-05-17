@@ -1,6 +1,6 @@
 import { placeAI } from "./ai";
-
-const { drawBoard } = require("./dom");
+import { ships } from "./shipController";
+import { drawBoard, placed_Ships } from "./dom";
 
 function noOverlap(tileID, shipLength, player) {
   let _arr = [];
@@ -19,8 +19,16 @@ function noOverlap(tileID, shipLength, player) {
   }
 }
 
+function canHit() {
+  if (placed_Ships == ships.length) {
+    return true;
+  } else {
+    return false;
+  }
+}
+
 drawBoard(10, "player");
 drawBoard(10, "opponent");
 placeAI();
 
-export { noOverlap };
+export { noOverlap, canHit };

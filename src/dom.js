@@ -1,4 +1,4 @@
-import { noOverlap } from ".";
+import { canHit, noOverlap } from ".";
 import { attackAI, attackPlayerBoard } from "./ai";
 import { opponentShips, ships } from "./shipController";
 
@@ -11,8 +11,14 @@ function createHull(index, i, side) {
   if (side == "p") {
   } else {
     hull.addEventListener("click", function () {
-      opponentShips[this.classList[2].slice(4)].hit(this.value, this);
-      attackPlayerBoard();
+      if (canHit()) {
+        opponentShips[this.classList[2].slice(4)].hit(
+          this.value,
+          this,
+          canHit()
+        );
+        attackPlayerBoard();
+      }
     });
   }
 
@@ -67,7 +73,9 @@ function drawBoard(size, player) {
     } else {
       temp.classList.add("o" + count);
       temp.addEventListener("click", function () {
-        attackAI(this.classList[1]);
+        if (canHit()) {
+          attackAI(this.classList[1]);
+        }
       });
     }
     temp.classList.add(player);
@@ -127,4 +135,4 @@ function placeShip(id) {
 
 drawShown();
 
-export { drawBoard, createHull, editBoard };
+export { drawBoard, createHull, editBoard, placed_Ships };

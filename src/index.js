@@ -2,13 +2,13 @@ import { placeAI } from "./ai";
 
 const { drawBoard } = require("./dom");
 
-function noOverlap(tileID, shipLength) {
+function noOverlap(tileID, shipLength, player) {
   let _arr = [];
   if (tileID + shipLength + 2 > 99) {
     return false;
   } else {
-    for (let i = 0; i < shipLength + 2; i++) {
-      let piece = document.querySelector(`.o${tileID + i}`);
+    for (let i = 0; i < shipLength; i++) {
+      let piece = document.querySelector(`.${player}${tileID + i}`);
       piece.classList.forEach((item) => {
         _arr.push(item);
       });

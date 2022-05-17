@@ -12,7 +12,7 @@ function placeAI() {
   if (aiPlaced < opponentShips.length) {
     let currentShip = opponentShips[aiPlaced];
 
-    if (noOverlap(tile, currentShip.shipSize)) {
+    if (noOverlap(tile, currentShip.shipSize, "o")) {
       if (tile > 9) {
         let _reduced = parseInt(tile.toString().slice(1));
 

@@ -1,3 +1,4 @@
+import { noOverlap } from ".";
 import { attackAI, attackPlayerBoard } from "./ai";
 import { opponentShips, ships } from "./shipController";
 
@@ -8,12 +9,10 @@ function createHull(index, i, side) {
   hull.classList.add(`ship${index}`);
   hull.value = i;
   if (side == "p") {
-    hull.addEventListener("click", function () {
-      ships[this.classList[2].slice(4)].hit(this.value, this);
-    });
   } else {
     hull.addEventListener("click", function () {
       opponentShips[this.classList[2].slice(4)].hit(this.value, this);
+      attackPlayerBoard();
     });
   }
 
@@ -96,26 +95,30 @@ function placeShip(id) {
 
     let tempValue = parseInt(id.slice(1, 3));
 
-    if (tempValue > 9) {
-      let _reduced = parseInt(id.slice(2));
+    if (noOverlap(tempValue, currentShip.shipSize, "p")) {
+      if (tempValue > 9) {
+        let _reduced = parseInt(id.slice(2));
 
-      if (10 - _reduced >= currentShip.shipSize) {
+        if (10 - _reduced >= currentShip.shipSize) {
+          let tempHull = currentShip.hullDiv;
+          for (let i = 0; i < currentShip.shipSize; i++) {
+            editBoard(`p${tempValue + i}`, tempHull[i]);
+          }
+        } else {
+          return;
+        }
+      } else {
         let tempHull = currentShip.hullDiv;
         for (let i = 0; i < currentShip.shipSize; i++) {
           editBoard(`p${tempValue + i}`, tempHull[i]);
         }
-      } else {
-        return;
       }
+      const shipContainer = document.querySelector(`.ship${placed_Ships}`);
+      shipContainer.classList.add("used");
+      placed_Ships++;
     } else {
-      let tempHull = currentShip.hullDiv;
-      for (let i = 0; i < currentShip.shipSize; i++) {
-        editBoard(`p${tempValue + i}`, tempHull[i]);
-      }
+      return;
     }
-    const shipContainer = document.querySelector(`.ship${placed_Ships}`);
-    shipContainer.classList.add("used");
-    placed_Ships++;
   }
 }
 

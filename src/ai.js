@@ -4,62 +4,58 @@ import { opponentShips, ships } from "./shipController";
 // Places AI Ships
 let aiPlaced = 0;
 
-function placeAiShips() {
-  // Choses a random position to place the ship
-  let tileID = Math.floor(Math.random() * 100);
-  console.log("tile ID: " + tileID);
-  console.log("Ship ID: " + aiPlaced);
-  console.log("ship Lenght: ", opponentShips[aiPlaced].shipSize);
+function placeAI() {
+  let tile = Math.floor(Math.random() * 100);
+  console.log(aiPlaced);
 
-  if (tileID > 9) {
-    console.log("Tile id > 9 passed");
-    // If the value is > 9 simplify the value to ones place
-    let _reduced = tileID.toString().slice(1);
-    if (10 - _reduced >= opponentShips[aiPlaced].shipSize) {
-      console.log("length check passed");
-      // if the picked x Value + ship length is < 9
-      console.log(noOverlap(tileID, opponentShips[aiPlaced].shipSize));
-      if (noOverlap(tileID, opponentShips[aiPlaced].shipSize)) {
-        console.log("overlap test passed");
-        console.log("Boat Placed");
-        for (let i = 0; i < opponentShips[aiPlaced].shipSize; i++) {
-          editBoard(`o${tileID + i}`, opponentShips[aiPlaced].hullDiv[i]);
+  if (aiPlaced < opponentShips.length) {
+    let currentShip = opponentShips[aiPlaced];
+
+    if (noOverlap(tile, currentShip.shipSize)) {
+      if (tile > 9) {
+        let _reduced = parseInt(tile.toString().slice(1));
+
+        if (10 - _reduced >= currentShip.shipSize) {
+          let tempHull = currentShip.hullDiv;
+          for (let i = 0; i < currentShip.shipSize; i++) {
+            editBoard(`o${tile + i}`, tempHull[i]);
+          }
+          aiPlaced++;
+          placeAI();
+        } else {
+          placeAI();
+        }
+      } else {
+        let tempHull = currentShip.hullDiv;
+        for (let i = 0; i < currentShip.shipSize; i++) {
+          editBoard(`o${tile + i}`, tempHull[i]);
         }
         aiPlaced++;
-      } else {
-        console.log("failed overlap test");
-        placeAiShips();
+        placeAI();
       }
     } else {
-      console.log("failed length test");
-      placeAiShips();
+      placeAI();
     }
   } else {
-    console.log("tile ID < 9");
-    if (10 - tileID >= opponentShips[aiPlaced].shipSize) {
-      console.log("<9 length passed");
-      console.log("Boat Placed");
-      for (let i = 0; i < opponentShips[aiPlaced].shipSize; i++) {
-        editBoard(`o${tileID + i}`, opponentShips[aiPlaced].hullDiv[i]);
-      }
-      aiPlaced++;
-    } else {
-      console.log("< 9 length failed");
-    }
-  }
-  if (aiPlaced < opponentShips.length) {
-    placeAiShips();
+    return;
   }
 }
 
 function noOverlap(tileID, shipLength) {
   let _arr = [];
-  for (let i = 0; i < shipLength; i++) {
-    let piece = document.querySelector(`.o${tileID + i}`);
-    _arr.push(piece.classList);
+  if (tileID + shipLength + 2 > 99) {
+    return false;
+  } else {
+    for (let i = 0; i < shipLength + 2; i++) {
+      let piece = document.querySelector(`.o${tileID + i}`);
+      piece.classList.forEach((item) => {
+        _arr.push(item);
+      });
+    }
+    console.log(_arr);
+    console.log(`Contains Hull? ${_arr.includes("hull")}`);
+    return !_arr.includes("hull");
   }
-
-  return !_arr.includes("hull");
 }
 
 let hitSpots = [];
@@ -82,4 +78,4 @@ function attackPlayerBoard() {
   }
 }
 
-export { attackPlayerBoard, placeAiShips };
+export { attackPlayerBoard, placeAI };

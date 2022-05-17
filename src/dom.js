@@ -71,6 +71,7 @@ function drawBoard(size, player) {
 }
 
 function editBoard(position, newHTML) {
+  console.log(`Placing boat ${newHTML} at ${position}`);
   let old = document.querySelector(`.${position}`);
   let temp = newHTML;
   temp.classList.add(old.classList[1]);

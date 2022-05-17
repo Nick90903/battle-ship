@@ -1,10 +1,10 @@
-import { placeAiShips } from "./ai";
+import { placeAI } from "./ai";
 
 const { drawBoard } = require("./dom");
 const { shipBuilder, testShip } = require("./shipController");
 
 drawBoard(10, "player");
 drawBoard(10, "opponent");
-placeAiShips();
+placeAI();
 
 export {};

@@ -26,12 +26,14 @@ function placeAI() {
         } else {
           placeAI();
         }
-      } else {
+      } else if (10 - tile >= currentShip.shipSize) {
         let tempHull = currentShip.hullDiv;
         for (let i = 0; i < currentShip.shipSize; i++) {
           editBoard(`o${tile + i}`, tempHull[i]);
         }
         aiPlaced++;
+        placeAI();
+      } else {
         placeAI();
       }
     } else {

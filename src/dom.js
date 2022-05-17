@@ -107,11 +107,14 @@ function placeShip(id) {
         } else {
           return;
         }
-      } else {
+      } else if (10 - id.slice(1) >= currentShip.shipSize) {
+        console.log(10 - currentShip.shipSize + "meme");
         let tempHull = currentShip.hullDiv;
         for (let i = 0; i < currentShip.shipSize; i++) {
           editBoard(`p${tempValue + i}`, tempHull[i]);
         }
+      } else {
+        return;
       }
       const shipContainer = document.querySelector(`.ship${placed_Ships}`);
       shipContainer.classList.add("used");

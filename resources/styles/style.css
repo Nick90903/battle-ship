@@ -6,6 +6,8 @@ body {
     display: flex;
     justify-content: space-between;
     margin-top: calc(50vh - 170px);
+    width: 1080px;
+    margin-left: calc(50vw - 540px);
 }
 
 
@@ -56,6 +58,10 @@ body {
     height: 32px;
 }
 
+.opponent {
+    background-color: white;
+}
+
 .miss {
     background-color: lightblue;
 }
@@ -71,3 +77,4 @@ body {
 .attacked {
     background-color: lightblue;
 }
+

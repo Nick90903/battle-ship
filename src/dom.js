@@ -102,6 +102,7 @@ function editBoard(position, newHTML) {
   let old = document.querySelector(`.${position}`);
   let temp = newHTML;
   temp.classList.add(old.classList[1]);
+  temp.classList.add(old.classList[2]);
   old.parentNode.replaceChild(temp, old);
 }
 
@@ -125,7 +126,6 @@ function placeShip(id) {
           return;
         }
       } else if (10 - id.slice(1) >= currentShip.shipSize) {
-        console.log(10 - currentShip.shipSize + "meme");
         let tempHull = currentShip.hullDiv;
         for (let i = 0; i < currentShip.shipSize; i++) {
           editBoard(`p${tempValue + i}`, tempHull[i]);

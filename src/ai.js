@@ -50,7 +50,7 @@ function attackPlayerBoard() {
   if (!hitSpots.includes(randomNumber)) {
     const hitBlock = document.querySelector(`.p${randomNumber}`);
     if (hitBlock.classList.contains("hull")) {
-      ships[hitBlock.classList[2].slice(4)].hit(hitBlock.value, hitBlock);
+      ships[hitBlock.classList[2].slice(4)].hit(hitBlock.value, hitBlock, true);
       console.log("hit Ship");
     } else {
       console.log("missed Ship");

@@ -31,4 +31,8 @@ drawBoard(10, "player");
 drawBoard(10, "opponent");
 placeAI();
 
+document
+  .querySelector(".reload")
+  .addEventListener("click", () => location.reload());
+
 export { noOverlap, canHit };

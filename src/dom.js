@@ -2,6 +2,7 @@ import { canHit, noOverlap } from ".";
 import { attackAI, attackPlayerBoard } from "./ai";
 import { opponentShips, ships } from "./shipController";
 
+let aiSunk = 0;
 function createHull(index, i, side) {
   let hull = document.createElement("div");
   hull.classList.add("board");
@@ -12,11 +13,19 @@ function createHull(index, i, side) {
   } else {
     hull.addEventListener("click", function () {
       if (canHit()) {
-        opponentShips[this.classList[2].slice(4)].hit(
-          this.value,
-          this,
-          canHit()
-        );
+        opponentShips[this.classList[2].slice(4)].hit(this.value, this, true);
+        if (opponentShips[this.classList[2].slice(4)].checkSunk()) {
+          console.log(
+            "issunk" + opponentShips[this.classList[2].slice(4)].checkSunk()
+          );
+          aiSunk++;
+          console.log(aiSunk);
+        }
+        if (aiSunk >= opponentShips.length) {
+          if (document.querySelector(".winner").textContent == "") {
+            document.querySelector(".winner").textContent = "Player Wins";
+          }
+        }
         attackPlayerBoard();
       }
     });

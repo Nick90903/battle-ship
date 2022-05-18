@@ -37,9 +37,13 @@ const shipBuilder = (count, index, side) => {
     return false;
   };
 
+  const checkSunk = () => {
+    return sunk;
+  };
+
   const drawShip = () => {};
 
-  return { hit, isSunk, shipSize, hullDiv };
+  return { hit, isSunk, checkSunk, shipSize, hullDiv };
 };
 
 let ships = [

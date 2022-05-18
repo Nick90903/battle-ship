@@ -45,13 +45,21 @@ function placeAI() {
 }
 
 let hitSpots = [];
+let playerSunk = 0;
 function attackPlayerBoard() {
   let randomNumber = Math.floor(Math.random() * 100);
   if (!hitSpots.includes(randomNumber)) {
     const hitBlock = document.querySelector(`.p${randomNumber}`);
     if (hitBlock.classList.contains("hull")) {
       ships[hitBlock.classList[2].slice(4)].hit(hitBlock.value, hitBlock, true);
-      console.log("hit Ship");
+      ships[hitBlock.classList[2].slice(4)].checkSunk()
+        ? playerSunk++
+        : console.log("hit Ship");
+      if (playerSunk >= ships.length) {
+        if (document.querySelector(".winner").textContent == "") {
+          document.querySelector(".winner").textContent = "Ai Wins";
+        }
+      }
     } else {
       console.log("missed Ship");
       hitBlock.classList.add("attacked");
